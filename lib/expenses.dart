@@ -1,4 +1,5 @@
 import 'package:expense_tracker/models/expense.dart';
+import 'package:expense_tracker/new_expense.dart';
 import 'package:expense_tracker/widgets/expenses_list.dart';
 import 'package:flutter/material.dart';
 
@@ -27,9 +28,18 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
   void _openExpenseModelSheet() {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
-      builder: (ctx) => const Text("Modal sheet"),
+      builder: (ctx) => NewExpense(
+        addNewExpense: _addNewExpense,
+      ),
     );
+  }
+
+  void _addNewExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
   }
 
   @override
